@@ -9,11 +9,17 @@
     :license: MIT, see LICENSE.txt for more details.
     
 """
-from flask import Flask as _Flask
-from flask import request as _request
-from flask import got_request_exception as _got_request_exception
-from flaskext.mail import Mail as _Mail 
-from flaskext.mail import Message as _Message
+import traceback
+try:
+    # putting in try-catch for now... because it could fail on import when the 
+    # package is being inspected.
+    from flask import Flask as _Flask
+    from flask import request as _request
+    from flask import got_request_exception as _got_request_exception
+    from flaskext.mail import Mail as _Mail 
+    from flaskext.mail import Message as _Message
+except ImportError:
+    print 'Imports not available..'
 
 _sender = None
 _recipients = []
@@ -32,6 +38,7 @@ def mail_on_500(app, recipients, sender='noreply@localhost'):
     :type sender: string
 
     '''
+    global _mail, _sender, _recipients
 
     assert isinstance(recipients, list) or isinstance(recipients, tuple)
     assert len(recipients) > 0
@@ -46,9 +53,14 @@ def _email_exception(sender, exception, **extra):
     recipients defined in the call to mail_on_500
 
     '''
+    global _mail, _sender, _recipients
 
     msg = _Message("[Flask|ErrorMail] Exception Detected: %s" % exception.message,
                   sender=_sender,
                   recipients=_recipients)
     msg.body = '%s\n\n%s' % (traceback.format_exc(), '\n'.join(['%s: %s' % (key, extra[key]) for key in extra]))
+    
     _mail.send(msg)
+
+
+__all__ = ['mail_on_500']

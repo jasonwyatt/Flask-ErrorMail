@@ -29,7 +29,6 @@ setup(
     packages=[
         'flask_errormail',
     ],
-    namespace_packages=['flask_errormail'],
     test_suite='nose.collector',
     zip_safe=False,
     platforms='any',
