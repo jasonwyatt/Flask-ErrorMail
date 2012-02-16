@@ -27,10 +27,9 @@ setup(
     description='Flask extension for sending administrators e-mails with stacktraces when internal server errors occur.',
     long_description=__doc__,
     packages=[
-        'flaskext',
-        'flaskext.errormail',
+        'flask_errormail',
     ],
-    namespace_packages=['flaskext'],
+    namespace_packages=['flask_errormail'],
     test_suite='nose.collector',
     zip_safe=False,
     platforms='any',
