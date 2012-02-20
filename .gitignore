@@ -3,3 +3,5 @@ Flask_ErrorMail.egg-info
 *.pyc
 .DS_Store
 _build
+build
+dist

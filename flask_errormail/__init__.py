@@ -58,7 +58,27 @@ def _email_exception(sender, exception, **extra):
     msg = _Message("[Flask|ErrorMail] Exception Detected: %s" % exception.message,
                   sender=_sender,
                   recipients=_recipients)
-    msg.body = '%s\n\n%s' % (traceback.format_exc(), '\n'.join(['%s: %s' % (key, extra[key]) for key in extra]))
+    msg_contents = [
+        'Traceback:',
+        '='*80,
+        traceback.format_exc(),
+    ]
+    msg_contents.append('\n')
+    msg_contents.append('Request Information:')
+    msg_contents.append('='*80)
+    environ = _request.environ
+    environkeys = sorted(environ.keys())
+    for key in environkeys:
+        msg_contents.append('%s: %s' % (key, environ.get(key)))
+        
+    msg_contents.append('\n')
+        
+    msg_contents.append('Flask Extras:')
+    msg_contents.append('='*80)
+    for key in extra:
+        msg_contents.append('\t%s: %s' % (key, extra[key]))
+    
+    msg.body = '\n'.join(msg_contents) + '\n'
     
     _mail.send(msg)
 
