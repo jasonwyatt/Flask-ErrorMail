@@ -6,7 +6,6 @@ ADMINISTRATORS = (
 )
 
 app = Flask(__name__)
-app.debug=True
 
 # Where the magic happens.
 mail_on_500(app, ADMINISTRATORS)

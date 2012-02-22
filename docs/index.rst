@@ -59,6 +59,8 @@ Configuration of **Flask-ErrorMail** is done via the *mail_on_500* function::
     app = Flask(__name__)
     mail_on_500(app, ADMINISTRATORS)
 
+**Note:** Flask-ErrorMail will not send emails if your app is in debug mode.
+
 API
 ---
 .. autofunction:: flask_errormail.mail_on_500
