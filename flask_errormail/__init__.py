@@ -28,15 +28,15 @@ def mail_on_500(app, recipients, sender='noreply@localhost'):
     #importing locally, so that the dependencies are only required if 
     # mail_on_500 is used.
     from flask import request as __request
-    from flaskext.mail import Mail as __Mail 
-    from flaskext.mail import Message as __Message
+    from flask_mail import Mail as __Mail
+    from flask_mail import Message as __Message
 
     mail = __Mail(app)
 
     # create a closure to track the sender and recipients
     def email_exception(exception):
-        '''Handles the exception message from Flask by sending an email to the 
-        recipients defined in the call to mail_on_500.  
+        '''Handles the exception message from Flask by sending an email to the
+        recipients defined in the call to mail_on_500.
 
         '''
 
@@ -55,9 +55,9 @@ def mail_on_500(app, recipients, sender='noreply@localhost'):
         environkeys = sorted(environ.keys())
         for key in environkeys:
             msg_contents.append('%s: %s' % (key, environ.get(key)))
-        
+
         msg.body = '\n'.join(msg_contents) + '\n'
-        
+
         mail.send(msg)
 
     app.register_error_handler(500, email_exception)
