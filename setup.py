@@ -19,7 +19,7 @@ from setuptools import setup
 
 setup(
     name='Flask-ErrorMail',
-    version='0.2.1',
+    version='0.2.2',
     url='http://github.com/jasonwyatt/Flask-ErrorMail',
     license='MIT',
     author='Jason Wyatt Feinstein',
