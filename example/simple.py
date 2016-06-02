@@ -1,9 +1,9 @@
 from flask import Flask, request
 from flask_errormail import mail_on_500
 
-ADMINISTRATORS = (
+ADMINISTRATORS = [
     "jason.feinstein@gmail.com",
-)
+]
 
 app = Flask(__name__)
 

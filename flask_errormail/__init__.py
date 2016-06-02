@@ -40,7 +40,7 @@ def mail_on_500(app, recipients, sender='noreply@localhost'):
 
         '''
 
-        msg = __Message("[Flask|ErrorMail] Exception Detected: %s" % exception.message,
+        msg = __Message("[Flask|ErrorMail] Exception Detected",
                         sender=sender,
                         recipients=recipients)
         msg_contents = [
