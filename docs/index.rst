@@ -52,9 +52,9 @@ Configuration of **Flask-ErrorMail** is done via the *mail_on_500* function::
     from flask import Flask
     from flask_errormail import mail_on_500
 
-    ADMINISTRATORS = (
+    ADMINISTRATORS = [
         # e-mail addresses
-    )
+    ]
 
     app = Flask(__name__)
     mail_on_500(app, ADMINISTRATORS)
